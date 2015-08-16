@@ -9,7 +9,7 @@ Analyze the proportion of of taxa at different taxonomy level.
 """
 import pandas as pd
 
-from util import Sample_Mapping
+from Sample_Mapping import Sample_Mapping
 
 
 class Taxonomy_Analysis(object):
@@ -82,9 +82,3 @@ class Taxonomy_Analysis(object):
 
         return propor_df
 
-
-if __name__=="__main__":
-    address = "/Users/Jessie/Dropbox/Pipline/OTU_Data/Teeth/tax_summarize/"
-    TA = Taxonomy_Analysis()
-    TA.calculate_proportion(address + "otu_table_tax_L2.txt")
-    TA.sum_taxa(0.001)

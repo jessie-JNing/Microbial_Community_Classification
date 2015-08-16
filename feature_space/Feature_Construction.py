@@ -13,11 +13,10 @@ Create four different feature space:
 """
 
 import glob
-
 import pandas as pd
 import dendropy
 
-from util import Sample_Mapping
+from util.Sample_Mapping import Sample_Mapping
 
 
 class Feature_Construction(object):
@@ -37,7 +36,6 @@ class Feature_Construction(object):
         appear_otus_list = ["Site", "Taxon"]
         index = 2
         for label in labels:
-            print "Collecting information from ", label, "samples..."
             for samples in glob.glob(otu_directory + label + "/*_pick_otu/*_otus.txt"):
                 sample_otu = {}
                 sample_id = '+'.join([samples.split("/")[-1].split("_")[0], label])
@@ -57,7 +55,6 @@ class Feature_Construction(object):
 
         # write features into a dataframe
         otu_df = pd.DataFrame(columns=appear_otus_list)
-        print "Write features into a dataframe"
         row_index = 0
         for sample in collect_samples:
             sample_row = sample.split("+") + [0 for x in range(len(appear_otus)-2)]
@@ -76,12 +73,10 @@ class Feature_Construction(object):
         tree_format /string/: specify the tree file format, eg. newick, nexus and etc
         """
         # read the tree file, if it's unrooted, choose the midpoint as root
-        print "Loading the tree file..."
         tree = dendropy.Tree()
         tree.read_from_path(tree_file, tree_format)
 
         # navigate the tree and calculate the clade features
-        print "Creating the clade file..."
         clade_counter = 0
         for node in tree.postorder_node_iter():
             if not node.is_leaf():
@@ -139,9 +134,3 @@ class Feature_Construction(object):
         return hybrid_df
 
 
-if __name__=="__main__":
-    address = "/Users/Jessie/Dropbox/Pipline/OTU_Data/Teeth/"
-    otu_df = pd.read_csv(address + "otu/otu_abundance.csv")
-    feature_constructor = Feature_Construction()
-    #feature_constructor.create_clade_features(otu_df, address + "Qiime_generated/Sequence_tree.tree")
-    #feature_constructor.create_function_features(address + "function/function_count.txt")

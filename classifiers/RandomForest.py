@@ -10,7 +10,6 @@ Random Forest classifier
 
 
 import pandas as pd
-from sklearn.svm import SVC
 import numpy as np
 from sklearn.cross_validation import KFold
 from sklearn.ensemble import RandomForestClassifier
@@ -86,9 +85,3 @@ class RandomForest(object):
         return cv_result_df
 
 
-
-if __name__=="__main__":
-    address = "/Users/Jessie/Dropbox/Pipline/OTU_Data/Teeth/otu/"
-    otu_df = pd.read_csv(address + "Chi_Square_abundance.csv")
-    rf_classifier = RandomForest()
-    rf_classifier.cross_validation(otu_df, address + "testrf.csv", fold_k=5)

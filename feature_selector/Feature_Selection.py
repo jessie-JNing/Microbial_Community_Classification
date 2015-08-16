@@ -116,10 +116,3 @@ class Feature_Selection(object):
 
         return [x[0] for x in fp_sort]
 
-
-
-if __name__=="__main__":
-    address = "/Users/Jessie/Dropbox/Pipline/OTU_Data/Teeth/otu/"
-    otu_df = pd.read_csv(address + "Chi_Square_abundance.csv")
-    feature_selector = Feature_Selection()
-    print feature_selector.chi_square(otu_df)

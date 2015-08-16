@@ -91,12 +91,3 @@ class svm(object):
         return cv_result_df
 
 
-
-if __name__=="__main__":
-    address = "/Users/Jessie/Dropbox/Pipline/OTU_Data/Teeth/otu/"
-    otu_df = pd.read_csv(address + "Chi_Square_abundance.csv")
-    svm_classifier = svm()
-    estm = svm_classifier.get_best_estimator(otu_df, 2)
-    print estm
-    svm_classifier.cross_validation(estm, address + "test.csv")
-    #print feature_selector.chi_square(otu_df)

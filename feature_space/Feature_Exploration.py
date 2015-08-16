@@ -72,10 +72,3 @@ class Feature_Exploration(object):
         return num_bin
 
 
-if __name__=="__main__":
-    address = "/Users/Jessie/Dropbox/Pipline/OTU_Data/Teeth/otu/"
-    feat_df = pd.read_csv(address + "otu_abundance.csv")
-    feature_explor = Feature_Exploration(feat_df)
-    print feature_explor.otu_distribution()
-    
-

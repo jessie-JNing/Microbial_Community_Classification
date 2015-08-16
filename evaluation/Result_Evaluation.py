@@ -104,11 +104,3 @@ class Result_Evaluation(object):
         return confusion_matrix
 
 
-
-
-if __name__=="__main__":
-    address = "/Users/Jessie/Dropbox/Pipline/OTU_Data/Teeth/otu/"
-    feat_df = pd.read_csv(address + "test.csv")
-    evaluator = Result_Evaluation(feat_df)
-    for a in evaluator.get_confusion_matrix():
-        print a

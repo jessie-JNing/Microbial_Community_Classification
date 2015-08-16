@@ -49,9 +49,3 @@ class Sample_Mapping(object):
         return mapping_dic
 
 
-if __name__=="__main__":
-    sample_mapper = Sample_Mapping()
-    print sample_mapper.nine_way_mapping(["Throat"])
-    print sample_mapper.four_way_mapping(["Saliva"])
-
-

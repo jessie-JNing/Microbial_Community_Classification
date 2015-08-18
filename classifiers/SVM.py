@@ -35,7 +35,7 @@ class svm(object):
 
         # initialize grid search parameters
         C_range = [2**i for i in range(5,15,2)]
-        gamma_range = [2**i for i in range(3, -1, -2)]
+        gamma_range = [2**i for i in range(3, -15, -2)]
         param_grid = dict(gamma=gamma_range, C=C_range)
 
         # use grid search to find the best parameter combination
@@ -44,7 +44,7 @@ class svm(object):
         grid.fit(self.attribute, self.label)
         return grid
 
-    def cross_validation(self, estimator, out_put):
+    def cross_validation(self, estimator, shuffle_op=False):
         """
         estimator /object/: grid search result object
         out_put /string/: directory saving the cross-valiation result
@@ -66,7 +66,8 @@ class svm(object):
             result = [id]
             result.extend(cv_result[id])
             cv_result_df.loc[id] = result
-        cv_result_df.to_csv(out_put, index=False)
+
+        return cv_result_df
 
 
 

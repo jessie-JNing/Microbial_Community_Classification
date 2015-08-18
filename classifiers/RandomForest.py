@@ -20,7 +20,7 @@ class RandomForest(object):
         pass
 
 
-    def cross_validation(self, dataset, out_put, mtry=500, fold_k=5, max_feat="auto"):
+    def cross_validation(self, dataset, mtry=500, fold_k=5, max_feat="auto", shuffle_op=False):
         """
         df /DataFrame/: input feature space
         out_put /string/: directory saving the cross-valiation result
@@ -34,7 +34,7 @@ class RandomForest(object):
 
         clf = RandomForestClassifier(n_estimators=mtry, bootstrap=False, max_features=max_feat, random_state=0,criterion='gini')
         cv_result = {}
-        for train, test in KFold(n=len(label),n_folds=fold_k, shuffle=False):
+        for train, test in KFold(n=len(label),n_folds=fold_k, shuffle=shuffle_op):
             clf.fit(attribute[train], label[train])
             predict = clf.predict(attribute[test])
             for x in zip(sample_id[test], label[test], predict):
@@ -46,7 +46,8 @@ class RandomForest(object):
             result = [id]
             result.extend(cv_result[id])
             cv_result_df.loc[id] = result
-        cv_result_df.to_csv(out_put, index=False)
+
+        return cv_result_df
 
 
     def train_process(self, trainset, mtry=500, max_feat="auto"):
